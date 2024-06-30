@@ -794,27 +794,27 @@ void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, 
 // NOTE: On OpenGL 3.3 and ES2 we use QUADS to avoid drawing order issues
 void DrawRectangleLines(int posX, int posY, int width, int height, Color color)
 {
-#if defined(SUPPORT_QUADS_DRAW_MODE)
-    DrawRectangle(posX, posY, width, 1, color);
-    DrawRectangle(posX + width - 1, posY + 1, 1, height - 2, color);
-    DrawRectangle(posX, posY + height - 1, width, 1, color);
-    DrawRectangle(posX, posY + 1, 1, height - 2, color);
-#else
+//#if defined(SUPPORT_QUADS_DRAW_MODE)
+//    DrawRectangle(posX, posY, width, 1, color);
+//    DrawRectangle(posX + width - 1, posY + 1, 1, height - 2, color);
+//    DrawRectangle(posX, posY + height - 1, width, 1, color);
+//    DrawRectangle(posX, posY + 1, 1, height - 2, color);
+//#else
     rlBegin(RL_LINES);
         rlColor4ub(color.r, color.g, color.b, color.a);
-        rlVertex2f(posX + 1, posY + 1);
-        rlVertex2f(posX + width, posY + 1);
+        rlVertex2f(posX, posY);
+        rlVertex2f(posX + width, posY);
 
-        rlVertex2f(posX + width, posY + 1);
+        rlVertex2f(posX + width, posY);
         rlVertex2f(posX + width, posY + height);
 
         rlVertex2f(posX + width, posY + height);
-        rlVertex2f(posX + 1, posY + height);
+        rlVertex2f(posX, posY + height);
 
-        rlVertex2f(posX + 1, posY + height);
-        rlVertex2f(posX + 1, posY + 1);
+        rlVertex2f(posX, posY + height);
+        rlVertex2f(posX, posY);
     rlEnd();
-#endif
+//#endif
 }
 
 // Draw rectangle outline with extended parameters
